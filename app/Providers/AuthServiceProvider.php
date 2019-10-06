@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
-use App\User;
+use App\Models\Members\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Carbon;
+
+use Nomadnt\LumenPassport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
