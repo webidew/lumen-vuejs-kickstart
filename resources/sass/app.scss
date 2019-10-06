@@ -1,0 +1,3 @@
+// This file seems to be necessary so that we can specify a source for .sass() call in mix
+@import '~vuetify/dist/vuetify.css';
+@import '~vuetify/src/styles/styles.sass';
