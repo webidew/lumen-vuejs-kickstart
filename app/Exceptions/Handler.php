@@ -9,10 +9,6 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
-
 class Handler extends ExceptionHandler
 {
     /**
@@ -49,29 +45,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-
-        if ($exception instanceof HttpException) {
-
-            $code = $exception->getStatusCode();
-
-            if ($exception instanceof ServiceUnavailableHttpException) {
-                $message = "MAINTAINANCE IN PROGRESS";
-                $desc = "Server is currently under maintainance - please come back again later.";
-            } elseif ($exception instanceof AccessDeniedHttpException){
-                $message = "ACCESS DENIED!";
-                $desc = "You have not enough right to access the requested page.";
-            } elseif ($exception instanceof NotFoundHttpException) {
-                $message = "PAGE NOT FOUND!";
-                $desc = "The page you are looking for does not exist or has been moved.";
-            } else {
-                $message = "ERROR OCCURED";
-                $desc = "An error has occured. Please report to the administrator for immediate action.";
-            }
-
-            $data = compact("code", "message", "desc");
-            return response (view("errors.layout", $data), $code);
-        }
-
         return parent::render($request, $exception);
     }
 }
